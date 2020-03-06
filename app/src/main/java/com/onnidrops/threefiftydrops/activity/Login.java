@@ -4,33 +4,70 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+
+import com.onnidrops.threefiftydrops.MainActivity;
 import com.onnidrops.threefiftydrops.R;
+import com.onnidrops.threefiftydrops.databinding.ActivityLoginBinding;
+import com.onnidrops.threefiftydrops.model.LoginModel;
 import com.onnidrops.threefiftydrops.util.RippleView;
+import com.onnidrops.threefiftydrops.view_model.LoginViewModel;
+
+import java.util.Objects;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
-public class Login extends Activity {
+
+public class Login extends AppCompatActivity {
     TextView mTxtTerms, mTxtSeconds, mTxtLoginName;
     LinearLayout mLlMobile, mLlOtp;
     EditText mEdtMobile;
     RippleView mRvSubmit, mRvResend;
     Boolean isLogin = true;
 
+
+    private LoginViewModel loginViewModel;
+
+    private ActivityLoginBinding binding;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
+        binding = DataBindingUtil.setContentView(Login.this, R.layout.activity_login);
+        binding.setLifecycleOwner(this);
+        binding.setLoginViewModel(loginViewModel);
 
-        Initialization();
-        InitializationViews();
-        SetClickEvents();
-        changeColor();
+//        Initialization();
+//        InitializationViews();
+//        SetClickEvents();
+//        changeColor();
+
+        loginViewModel.getLogin().observe(this, new Observer<LoginModel>() {
+            @Override
+            public void onChanged(LoginModel loginModel) {
+            if (!loginModel.isMobileNo()) {
+                    binding.edtMobile.setError("Enter at least 6 Digit password");
+                    binding.edtMobile.requestFocus();
+                }
+                else {
+                    binding.edtMobile.setText(loginModel.getMobileNo());
+                    System.out.println(loginModel.getMobileNo());
+                }
+            }
+        });
+
     }
 
     void changeColor() {
@@ -76,6 +113,4 @@ public class Login extends Activity {
             }
         });
     }
-
-
 }

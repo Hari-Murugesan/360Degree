@@ -3,7 +3,6 @@
     xmlns:dist="http://schemas.android.com/apk/distribution"
     package="com.onnidrops.threefiftydrops">
 
-
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <dist:module dist:instant="true" />

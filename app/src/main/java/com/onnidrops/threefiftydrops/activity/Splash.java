@@ -28,3 +28,22 @@ public class Splash extends Activity {
         },1000);
     }
 }
+
+
+
+//    BACKGROUND GREY => #f6f4f4
+//        TEXT GREY => #606060
+//        Grey Divider Line => #b3b3b3
+//
+//        Dark Text = > #000000
+//        input text => #606060
+//        product description Grey text => #b3b3b3
+//        yellow text => #faba1a
+//
+//        Price strike line => #87121f
+//        Radio button Grey => #b3b3b3
+//        Radio Button select Gradient =>
+//        bottom yellow
+//        #faba19
+//        top yellow
+//        #fee06b

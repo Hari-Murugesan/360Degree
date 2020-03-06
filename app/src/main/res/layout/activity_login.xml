@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/login_bg"
-    android:orientation="vertical">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="loginViewModel"
+            type="com.onnidrops.threefiftydrops.view_model.LoginViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/login_bg"
+        android:orientation="vertical">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -47,6 +58,7 @@
                 android:background="@android:color/transparent"
                 android:hint="Mobile Number"
                 android:inputType="number"
+                android:text="@={loginViewModel.mobileNo}"
                 android:maxLength="10"
                 android:paddingLeft="10dp"
                 android:textSize="16dp" />
@@ -124,6 +136,7 @@
                 android:layout_height="40dp"
                 android:background="@drawable/ic_round_corner_button"
                 android:text="Next"
+                android:onClick="@{(v) -> loginViewModel.onClick(v)}"
                 android:textAllCaps="false"
                 android:textColor="@color/login_text_name"
                 android:textSize="16dp" />
@@ -159,5 +172,5 @@
             android:textSize="11dp" />
 
     </LinearLayout>
-
-</LinearLayout>
+    </LinearLayout>
+</layout>
